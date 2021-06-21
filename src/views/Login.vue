@@ -4,14 +4,14 @@
       <form>
         <div>
            <label>Username</label><br>
-          <input type="text">
+          <input type="text" v-model="credential.userName">
         </div>
         <div>
           <label>Password</label><br>
-          <input type="password">
+          <input type="password" v-model="credential.password">
         </div>
         <div>
-          <button @click="login">Submit</button>
+          <button type="button" @click="login">Submit</button>
         </div>
       </form>
     </div>
@@ -30,7 +30,13 @@ export default {
   },
   methods: {
     login(){
-
+      fetch('http://127.0.0.1:8081/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.credential)
+      })
     }
   }
 }
